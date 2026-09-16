@@ -1,0 +1,37 @@
+[package]
+name = "optionsearch-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "optionSearch engine: in-memory index, SQLite persistence, parallel matcher, watcher and previews"
+keywords = ["search", "files", "linux", "sqlite", "local-first"]
+categories = ["filesystem", "command-line-utilities"]
+
+[dependencies]
+anyhow = { workspace = true }
+optionSDK = { workspace = true }
+jwalk = "0.8"
+rusqlite = { version = "0.32", features = ["bundled"] }
+regex-syntax = "0.8"
+regex = "1"
+memchr = "2"
+mime_guess = { workspace = true }
+rayon = "1.10"
+serde = { workspace = true }
+toml = { workspace = true }
+notify = { version = "8.2", default-features = false }
+image = { version = "0.25", default-features = false, features = [
+    "png",
+    "jpeg",
+    "gif",
+    "webp",
+    "bmp",
+    "tiff",
+    "ico",
+] }
+
+[dev-dependencies]
+tempfile = "3"

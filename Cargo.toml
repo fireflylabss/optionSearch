@@ -1,0 +1,32 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/optionsearch-core",
+    "crates/optionsearch-cli",
+    "crates/optionsearch-gui",
+]
+
+[workspace.package]
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+authors = ["AEFireflyLabs"]
+repository = "https://github.com/fireflylabss/optionSearch"
+
+[workspace.dependencies]
+optionSDK = { path = "../optionSDK", version = "0.1.3" }
+optionsearch-core = { path = "crates/optionsearch-core", version = "0.2.0" }
+optionsearch-cli = { path = "crates/optionsearch-cli", version = "0.2.0" }
+anyhow = "1"
+clap = { version = "4", features = ["derive", "color"] }
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+mime_guess = "2"
+gtk = { package = "gtk4", version = "0.9", features = ["v4_14"] }
+adw = { package = "libadwaita", version = "0.7", features = ["v1_5"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

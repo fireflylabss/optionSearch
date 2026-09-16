@@ -1,0 +1,27 @@
+[package]
+name = "optionsearch-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "optionsearch — optionSearch CLI: index, watch, search and previews against the local index"
+readme = "../../README.md"
+keywords = ["search", "files", "cli", "sqlite", "local-first"]
+categories = ["command-line-utilities"]
+
+[[bin]]
+name = "optionsearch"
+path = "src/main.rs"
+
+[[bin]]
+name = "nld"
+path = "src/main.rs"
+
+[dependencies]
+optionSDK = { workspace = true }
+optionsearch-core = { workspace = true }
+anyhow = { workspace = true }
+clap = { workspace = true }
+mime_guess = { workspace = true }

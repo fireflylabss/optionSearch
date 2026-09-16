@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout optionSearch
+        uses: actions/checkout@v4
+        with:
+          path: optionSearch
+
+      - name: Checkout optionSDK
+        uses: actions/checkout@v4
+        with:
+          repository: fireflylabss/optionSDK
+          path: optionSDK
+          # Pin when CI flakes on SDK main; default tracks latest.
+          # ref: v0.1.3
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libgtk-4-dev \
+            libadwaita-1-dev \
+            pkg-config
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Cache cargo artifacts
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: optionSearch -> target
+
+      - name: Check formatting
+        working-directory: optionSearch
+        run: cargo fmt --all --check
+
+      - name: Build
+        working-directory: optionSearch
+        run: cargo build --release --workspace
+
+      - name: Clippy
+        working-directory: optionSearch
+        run: cargo clippy --release --all-targets -- -D warnings
+
+      - name: Test
+        working-directory: optionSearch
+        run: cargo test --release -p optionsearch-core

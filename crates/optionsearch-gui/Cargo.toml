@@ -1,0 +1,31 @@
+[package]
+name = "optionsearch-gui"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+description = "optionsearch-gtk — GTK/libadwaita desktop search window over the optionSearch index"
+readme = "../../README.md"
+keywords = ["search", "files", "gtk", "local-first", "desktop"]
+categories = ["gui"]
+
+[[bin]]
+name = "optionsearch-gtk"
+path = "src/main.rs"
+
+[[bin]]
+name = "needle"
+path = "src/main.rs"
+
+[dependencies]
+optionSDK = { workspace = true }
+optionsearch-core = { workspace = true }
+optionsearch-cli = { path = "../optionsearch-cli", version = "0.2.0" }
+anyhow = { workspace = true }
+mime_guess = { workspace = true }
+gtk = { workspace = true }
+adw = { workspace = true }
+glib = { version = "0.20", features = ["v2_80"] }
+gio = { version = "0.20", features = ["v2_80"] }
