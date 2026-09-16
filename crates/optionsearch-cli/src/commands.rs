@@ -12,7 +12,7 @@ use crate::cli::Command;
 
 /// optionSearch's Option-family identity: data lives under `~/.option/search`.
 pub fn app() -> option_sdk::App {
-    option_sdk::App::SEARCH
+    optionsearch_core::config::search_app()
 }
 
 /// Migrates the legacy `~/.option/needle` tree into `~/.option/search` once,

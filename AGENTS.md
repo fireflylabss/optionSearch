@@ -37,7 +37,7 @@ Do **not** leave the user on stale `~/.cargo/bin/optionsearch` / `optionsearch-g
 ## Stack notes
 
 - Workspace crates: `crates/optionsearch-core` (in-memory index, SQLite persistence, parallel matcher, watcher, previews) + `crates/optionsearch-cli` (`optionsearch` + `nld`) + `crates/optionsearch-gui` (`optionsearch-gtk` + `needle`, GTK4/libadwaita window)
-- `optionSDK` via workspace path `../optionSDK` (`App::SEARCH`, `ensure()`, `migrate_dir`, atomic writes); optionSearch adds `prepare_state()` (migrate + ensure) shared by CLI and GUI
+- `optionSDK` via workspace path `../optionSDK` (`App::new`, `ensure()`, `migrate_dir`, atomic writes); optionSearch adds `search_app()` (identity) and `prepare_state()` (migrate + ensure) shared by CLI and GUI
 - State: `~/.option/search/` (canonical), honored via `$OPTION_HOME`; one-time migration of legacy `~/.option/needle` on first CLI **or** GUI run
 - Config canonical at `~/.option/search/config.toml` with `~/.config/optionsearch` → `~/.config/needle` fallbacks; index DB at `~/.option/search/index.sqlite3`; config writes are atomic
 - Watcher uses Linux inotify through `notify` as an intentional foreground process (supervisable via a systemd user unit)
@@ -58,7 +58,7 @@ When documenting uncommitted work, prepend or expand the matching `vX.Y.Z[-m]-<c
 
 - Commit or push unless the user asks
 - Force-push / skip hooks / amend pushed commits
-- Bypass `prepare_state()` / `App::SEARCH.ensure()` or write outside `~/.option/search` except the documented config fallbacks
+- Bypass `prepare_state()` / `search_app().ensure()` or write outside `~/.option/search` except the documented config fallbacks
 - Regress the local-first contract (no network, daemon, telemetry, or remote API) without intent
 
 ## GTK verification

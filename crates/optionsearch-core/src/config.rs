@@ -42,6 +42,16 @@ pub struct Config {
     pub cache_dir: PathBuf,
 }
 
+/// The optionSearch app identity under `~/.option/search`.
+///
+/// Built with [`option_sdk::App::new`] rather than a family constant so it
+/// compiles against published optionSDK releases (which may predate a
+/// dedicated `SEARCH` constant). Matches the `search`/`⌕`/`optionSearch`
+/// identity and `io.option.search` bundle id.
+pub fn search_app() -> option_sdk::App {
+    option_sdk::App::new("search", "⌕", "optionSearch")
+}
+
 impl Default for Config {
     fn default() -> Self {
         Config {
@@ -55,8 +65,8 @@ impl Default for Config {
             max_results: 500,
             watch_budget: 400_000,
             watch_debounce_ms: 200,
-            db_path: option_sdk::App::SEARCH.path("index.sqlite3"),
-            cache_dir: option_sdk::App::SEARCH.cache_dir(),
+            db_path: search_app().path("index.sqlite3"),
+            cache_dir: search_app().cache_dir(),
         }
     }
 }
@@ -117,7 +127,7 @@ impl Config {
 
     /// Canonical config path: `~/.option/search/config.toml` (honors `$OPTION_HOME`).
     pub fn default_path() -> PathBuf {
-        option_sdk::App::SEARCH.config_toml()
+        search_app().config_toml()
     }
 
     /// Creates the directories the engine writes to.
@@ -141,13 +151,10 @@ mod tests {
             c.db_path.file_name().and_then(|s| s.to_str()),
             Some("index.sqlite3")
         );
-        assert_eq!(c.db_path, option_sdk::App::SEARCH.path("index.sqlite3"));
-        assert_eq!(c.cache_dir, option_sdk::App::SEARCH.cache_dir());
+        assert_eq!(c.db_path, search_app().path("index.sqlite3"));
+        assert_eq!(c.cache_dir, search_app().cache_dir());
         assert_eq!(c.max_results, 500);
-        assert_eq!(
-            Config::default_path(),
-            option_sdk::App::SEARCH.config_toml()
-        );
+        assert_eq!(Config::default_path(), search_app().config_toml());
     }
 
     #[test]
@@ -213,7 +220,7 @@ mod tests {
     fn fallback_chain_ordering() {
         let chain = Config::fallback_chain();
         assert_eq!(chain.len(), 3);
-        assert_eq!(chain[0], option_sdk::App::SEARCH.config_toml());
+        assert_eq!(chain[0], search_app().config_toml());
         assert!(chain[1].ends_with(".config/optionsearch/config.toml"));
         assert!(chain[2].ends_with(".config/needle/config.toml"));
     }

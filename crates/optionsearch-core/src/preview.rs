@@ -73,7 +73,7 @@ impl Default for PreviewLimits {
         PreviewLimits {
             max_text_bytes: 64 * 1024,
             max_image_bytes: 64 * 1024 * 1024,
-            cache_dir: option_sdk::App::SEARCH.cache_dir(),
+            cache_dir: crate::config::search_app().cache_dir(),
         }
     }
 }

@@ -23,7 +23,7 @@ conflicts=('needle')
 replaces=('needle')
 options=('!lto')
 # Path dep: workspace expects ../optionSDK next to the extracted sources.
-_optionsdk_ver=0.1.3
+_optionsdk_ver=0.1.4
 # Channeled release tag (Option mixed/stable). pkgver stays numeric for the AUR;
 # the source archive points at the exact tag.
 _tag=v0.2.0m-stable
