@@ -3,7 +3,7 @@
 # Usage: ./packaging/aur/bump.sh v0.2.0m-stable
 #        ./packaging/aur/bump.sh v0.2.0
 #        ./packaging/aur/bump.sh 0.2.0
-# Optional env: OPTIONSDK_VER=0.1.4 (defaults to _optionsdk_ver in PKGBUILD)
+# Optional env: OPTIONSDK_VER=0.1.3 (defaults to _optionsdk_ver in PKGBUILD)
 #
 # Channeled tags (Option mixed/stable, e.g. v0.2.0m-stable) map to a numeric
 # pkgver (0.2.0); the exact tag is kept in _tag and used for the source URL.
