@@ -32,7 +32,7 @@ source=(
   "optionSDK-$_optionsdk_ver.tar.gz::https://github.com/fireflylabss/optionSDK/archive/refs/tags/v$_optionsdk_ver.tar.gz"
 )
 sha256sums=(
-  'cb651a9ef891933a9b8269698822534694e4988f85730db47c84c4193887b948'
+  '70f734428e05d83290ac9a81e52a8ea778ac72149a932a0426854fa4cf6cdd10'
   'fadd75e0c6ade33018fb741a2f7e395649fff2833f6d08dde5c42459c37012a7'
 )
 
